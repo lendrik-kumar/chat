@@ -27,6 +27,6 @@ const server = app.listen(port, () => {
 })
 
 mongoose
-    .connect(dataBaseUri, { useNewUrlParser: true, useUnifiedTopology: true})
+    .connect(dataBaseUri)
     .then(() => console.log('MongoDB database connection established successfully'))
     .catch(err => console.log(err))
