@@ -8,9 +8,11 @@ import { SIGNUP_ROUTE , LOGIN_ROUTE } from '../../utils/constants.js'
 import { apiClient } from '../../lib/api-client.js'
 import Background from '../../assets/login2.png'
 import { useNavigate } from 'react-router-dom'
+import { useAppStore } from '../../store/index.js'
 
 const Auth = () => {
     const navigate = useNavigate()
+    const {setUserInfo} = useAppStore()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
@@ -53,6 +55,7 @@ const Auth = () => {
                 if (response.status === 201) {
                     toast.success('Signup successful')
                         navigate('/profile')
+                        setUserInfo(response.data.user)
                 } else {
                     toast.error('Signup failed')
                 }
@@ -68,6 +71,7 @@ const Auth = () => {
             try {
                 const response = await apiClient.post(LOGIN_ROUTE, { email, password }, { withCredentials: true })
                 if (response.data.user.id) {
+                    setUserInfo(response.data.user)
                     if (response.data.user.profileSetup) navigate('/chat')
                     else navigate('/profile')
                 } else {

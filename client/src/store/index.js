@@ -1,7 +1,6 @@
 import { create } from'zustand'
-import { authSlice } from './slices/authSlice'
+import { createAuthSlice } from './slices/authSlice.js'
 
 export const useAppStore = create()((...a) => ({
-    ...createAuthSlice(...a),
-    
+    ...createAuthSlice(...a)
 }))
