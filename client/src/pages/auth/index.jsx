@@ -75,7 +75,7 @@ const Auth = () => {
                     if (response.data.user.profileSetup) navigate('/chat')
                     else navigate('/profile')
                 } else {
-                    toast.error('Login failed')
+                    toast.error('check credentials')
                 }
             } catch (error) {
                 toast.error('Login failed: ' + error.message)

@@ -1,11 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'sonner'
+import { useAppStore } from '../../store/index.js'
 
 const Chat = () => {
-  return (
-    <div>
-      chat
-    </div>
-  )
+  const { userInfo } = useAppStore()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (userInfo && !userInfo.profileSetup) {
+      toast("Setup profile first")
+      navigate("/profile")
+    }
+  }, [userInfo, navigate])
+
+  return <div>Chat</div>
 }
 
 export default Chat

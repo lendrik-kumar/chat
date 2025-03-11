@@ -4,6 +4,7 @@ import { useAppStore } from '../../store/index.js'
 const Profile = () => {
 
   const {userInfo} = useAppStore()
+  const [firstName, setName] = useState("")
 
   return (
     <div>
