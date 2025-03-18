@@ -12,9 +12,9 @@ export const color = [
   "bg-[#4cc9f02a] text-[#4cc9f0] border-[1px] border-[#4cc9f0bb]"
 ]
 
-export const getColor = () => {
-  if (color >= 0 && color.length) {
-    return color(color)
+export const getColor = (index) => {
+  if (index >= 0 && index < color.length) {
+    return color[index]
   }
   return color[0]
 }

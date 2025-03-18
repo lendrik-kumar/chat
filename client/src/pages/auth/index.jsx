@@ -4,15 +4,16 @@ import { TabsList, TabsTrigger, TabsContent, Tabs } from '../../components/ui/ta
 import { Input } from '../../components/ui/input'
 import { Button } from '../../components/ui/button'
 import { toast } from 'sonner'
-import { SIGNUP_ROUTE , LOGIN_ROUTE } from '../../utils/constants.js'
+import { SIGNUP_ROUTE, LOGIN_ROUTE } from '../../utils/constants.js'
 import { apiClient } from '../../lib/api-client.js'
 import Background from '../../assets/login2.png'
 import { useNavigate } from 'react-router-dom'
 import { useAppStore } from '../../store/index.js'
+import { FaGithub } from "react-icons/fa";
 
 const Auth = () => {
     const navigate = useNavigate()
-    const {setUserInfo} = useAppStore()
+    const { setUserInfo } = useAppStore()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
@@ -50,12 +51,12 @@ const Auth = () => {
         if (validateSignup()) {
             try {
                 const response = await apiClient.post(SIGNUP_ROUTE,
-                 { email, password },
-                 {withCredentials:true} )
+                    { email, password },
+                    { withCredentials: true })
                 if (response.status === 201) {
                     toast.success('Signup successful')
-                        navigate('/profile')
-                        setUserInfo(response.data.user)
+                    navigate('/profile')
+                    setUserInfo(response.data.user)
                 } else {
                     toast.error('Signup failed')
                 }
@@ -75,7 +76,7 @@ const Auth = () => {
                     if (response.data.user.profileSetup) navigate('/chat')
                     else navigate('/profile')
                 } else {
-                    toast.error('check credentials')
+                    toast.error('Check credentials')
                 }
             } catch (error) {
                 toast.error('Login failed: ' + error.message)
@@ -84,7 +85,18 @@ const Auth = () => {
     }
 
     return (
-        <div className='h-[100vh] w-[100vw] flex items-center justify-center'>
+        <div className='h-[100vh] w-[100vw] flex items-center justify-center relative'>
+            {/* GitHub Link */}
+            <a
+                href="https://github.com/lendrik-kumar/chat.git"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute top-5 right-5 flex items-center gap-2 text-black font-bold text-lg hover:text-purple-700 transition-all duration-300"
+            >
+                <FaGithub className="text-2xl" />
+                Source code of this project
+            </a>
+
             <div className='h-[80vh] bg-white border-2 border-white text-opacity-90 shadow-2xl w-[80vw] md:w-[90vw] lg:w-[70vw] xl:w-[60vw] rounded-3xl grid xl:grid-cols-2'>
                 <div className='flex flex-col gap-10 items-center justify-center'>
                     <div className='flex items-center justify-center flex-col'>

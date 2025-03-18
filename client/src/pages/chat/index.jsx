@@ -14,7 +14,10 @@ const Chat = () => {
     }
   }, [userInfo, navigate])
 
-  return <div>Chat</div>
+  
+  return (
+    <div>Chat</div>
+  )
 }
 
 export default Chat
